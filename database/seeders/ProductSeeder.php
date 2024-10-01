@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
                 'name' => $product,
                 'amount' => fake()->randomNumber(),
                 'price' => fake()->randomNumber(),
-                'date' => fake()->date(),
+                'category' => fake()->randomElement(['0', '1']),
             ]);
         }
     }

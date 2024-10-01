@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('solds', function (Blueprint $table) {
             $table->id();
-            $table->integer('gross_amount');
-            $table->string('date');
+            $table->integer('amount');
+            $table->foreignId('products_id')->constrained()->onDelete('cascade');
+            $table->date('date');
             $table->timestamps();
         });
     }
