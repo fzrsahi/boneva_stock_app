@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Sold;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SoldController extends Controller
@@ -11,33 +12,75 @@ class SoldController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $datas = Product::with(['sold' => function ($query) {
-            $query->orderBy('date', 'asc');
-        }])
-            ->get()
-            ->map(function ($product) {
-                $totalSold = $product->sold->sum('amount');
-                $totalProfit = $totalSold * $product->price;
-                $dateRange = '';
+        $period = $request->input('period', 'month'); // default to month
+        $date = $request->input('date', now()->format('Y-m-d'));
 
-                if ($product->sold->isNotEmpty()) {
-                    $startDate = $product->sold->min('date');
-                    $endDate = $product->sold->max('date');
-                    $dateRange = $startDate . ' - ' . $endDate;
-                }
+        $query = Product::query()->with(['sold' => function ($query) use ($period, $date) {
+            $startDate = $this->getStartDate($date, $period);
+            $endDate = $this->getEndDate($date, $period);
 
-                return [
-                    'name' => $product->name,
-                    'total_sold' => $totalSold,
-                    'date_range' => $dateRange,
-                    'price' => $product->price,
-                    'total_profit' => $totalProfit,
-                ];
-            });
+            $query->whereBetween('date', [$startDate, $endDate])
+                ->orderBy('date', 'asc');
+        }]);
 
-        return view('pages.sold.index', compact('datas'));
+        $profitData = $query->get()->map(function ($product) {
+            $totalSold = $product->sold->sum('amount');
+            $totalProfit = $totalSold * $product->price;
+
+            $dateRange = $product->sold->isNotEmpty()
+                ? $product->sold->min('date') . ' - ' . $product->sold->max('date')
+                : '-';
+
+            return [
+                'name' => $product->name,
+                'total_sold' => $totalSold,
+                'date_range' => $dateRange,
+                'price' => $product->price,
+                'total_profit' => $totalProfit,
+            ];
+        });
+
+        $currentPeriod = $this->getCurrentPeriodLabel($date, $period);
+
+        return view('pages.sold.index', compact('profitData', 'period', 'date', 'currentPeriod'));
+    }
+
+    private function getStartDate($date, $period)
+    {
+        $carbon = Carbon::parse($date);
+
+        return match ($period) {
+            'day' => $carbon->startOfDay(),
+            'week' => $carbon->startOfWeek(),
+            'month' => $carbon->startOfMonth(),
+            default => $carbon->startOfMonth(),
+        };
+    }
+
+    private function getEndDate($date, $period)
+    {
+        $carbon = Carbon::parse($date);
+
+        return match ($period) {
+            'day' => $carbon->endOfDay(),
+            'week' => $carbon->endOfWeek(),
+            'month' => $carbon->endOfMonth(),
+            default => $carbon->endOfMonth(),
+        };
+    }
+
+    private function getCurrentPeriodLabel($date, $period)
+    {
+        $carbon = Carbon::parse($date);
+
+        return match ($period) {
+            'day' => $carbon->format('d F Y'),
+            'week' => $carbon->startOfWeek()->format('d F') . ' - ' . $carbon->endOfWeek()->format('d F Y'),
+            'month' => $carbon->format('F Y'),
+            default => $carbon->format('F Y'),
+        };
     }
 
 
