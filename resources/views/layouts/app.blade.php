@@ -14,10 +14,19 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        body {
+            background-image: url('image/3.jpeg');
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat; 
+        }
+    </style>
+
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-blue-400">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
