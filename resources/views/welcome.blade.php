@@ -20,28 +20,55 @@
             <img src="{{ asset('landing/images/logo.png') }}" style="height: 100px;width: 100px" />
         </div>
         <nav>
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#features">FEATURES</a></li>
-                <li><a href="#products">PRODUCTS</a></li>
-                <li><a href="#service">SERVICES</a></li>
-                <li><a href="#testimonial">TESTIMONIALS</a></li>
-                <li><a href="#contact">CONTACT US</a></li>
-            </ul>
-        </nav>
-        <div class="side-menu close" id="side-menu">
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#features">FEATURES</a></li>
-                <li><a href="#products">PRODUCTS</a></li>
-                <li><a href="#service">SERVICES</a></li>
-                <li><a href="#testimonial">TESTIMONIALS</a></li>
-                <li><a href="#contact">CONTACT US</a></li>
-            </ul>
-        </div>
-        <span class="call-btn"><i class='bx bxs-phone-call'></i></span>
+    <ul>
+        <li><a href="#home">BERANDA</a></li>
+        <li><a href="#about">TENTANG</a></li>
+        <li><a href="#features">FITUR</a></li>
+        <li><a href="#products">PRODUK</a></li>
+        <li><a href="#service">LAYANAN</a></li>
+        <li><a href="#testimonial">TESTIMONI</a></li>
+        <li><a href="#contact">HUBUNGI KAMI</a></li>
+    </ul>
+</nav>
+<div class="side-menu close" id="side-menu">
+    <ul>
+        <li><a href="#home">BERANDA</a></li>
+        <li><a href="#about">TENTANG</a></li>
+        <li><a href="#features">FITUR</a></li>
+        <li><a href="#products">PRODUK</a></li>
+        <li><a href="#service">LAYANAN</a></li>
+        <li><a href="#testimonial">TESTIMONI</a></li>
+        <li><a href="#contact">HUBUNGI KAMI</a></li>
+    </ul>
+</div>
+
+            @if (Route::has('login'))
+                            <nav class="login-btn">
+                                <ul>
+                                @auth
+                                   <a
+                                        href="{{ url('/dashboard') }}"
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    >
+                                        Dashboard
+                                    </a>
+                                @else
+
+                                    @if (Route::has('register'))
+                                        <a
+                                            href="{{ route('register') }}"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        >
+                                            Register
+                                        </a>
+
+                                    @endif
+                                @endauth
+                                </ul>
+                                
+                            </nav>
+                        @endif
+
     </header>
     <main id="home">
         <div class="my-slider">
@@ -91,12 +118,10 @@
             </div>
             <div class="col-5">
                 <h3>
-                    Water Purified by Nature and Delivered with Love
+                    "Kesegaran Murni, Dihadirkan oleh Alam"
                 </h3>
                 <p>
-                    Our pristine water flows from the Penobscot Ridge Mountains. The bountiful “stream” is the
-                    wellspring that constantly provides fresh, clean water to our well located just a few steps away
-                    from our plant.
+                Sumber air kami terletak hanya beberapa langkah dari pabrik kami, memastikan setiap tetes air yang kami kemas selalu dalam kondisi terbaik. Proses pengolahan yang kami terapkan memelihara kealamian air, sehingga setiap botol Boneva yang Anda nikmati adalah representasi sejati dari kebersihan dan kesegaran alam.
                 </p>
                 <button>Pelajari Selengkapnya</button>
             </div>
@@ -106,64 +131,88 @@
         <div class="attribute">
             <i class='bx bxs-shield'></i>
             <div>
-                <h4>Protection from Bacteria</h4>
-                <p>Though spring water is naturally clean, we try our best to make sure that our water is bacteria-free
-                    at all production stages.
-                </p>
-            </div>
+    <h4>Perlindungan dari Bakteri</h4>
+    <p>Meskipun air mata air secara alami bersih, kami berusaha sebaik mungkin untuk memastikan bahwa air kami bebas dari bakteri di semua tahap produksi.</p>
+</div>
+
 
         </div>
         <div class="attribute">
             <i class='bx bxs-leaf'></i>
             <div>
-                <h4>No Contaminants
-                </h4>
-                <p>
-                    We control the production process of our water to make sure you receive the best product from the
-                    company, which you can trust.
-            </div>
+        <h4>Rasa Segar yang Alami</h4>
+        <p>Sumber air kami berasal dari pegunungan yang bersih, memberikan rasa segar dan alami yang tak tertandingi. Setiap tegukan membawa kesegaran dari alam langsung ke Anda.</p>
+    </div>
 
         </div>
         <div class="attribute">
             <i class='bx bxs-droplet'></i>
             <div>
-                <h4>Automated Bottling Lines
-                </h4>
-                <p>
-                    The process of bottling the spring water at our plant is fully automatized. However, we always
-                    control it to ensure the high quality.
-                </p>
-
-            </div>
+        <h4>Saluran Pengemasan Otomatis</h4>
+        <p>Proses pengemasan air mata air di pabrik kami sepenuhnya otomatis. Namun, kami selalu mengawasinya untuk memastikan kualitas yang tinggi.</p>
+    </div>
         </div>
     </section>
     <section class="landscape" style="background: url({{ asset('landing/images/background.jpg') }})">
-        <div>
-            <h3>
-                From an Artesian Well to Home and Office
-            </h3>
-            <p>
-                For more than 60 years, we have been supplying the American homes and offices with high-quality spring
-                water from a pristine stream near our plant.
-            </p>
-            <button class="glass-btn">READ MORE</button>
-        </div>
+    <div>
+    <h3>
+        Dari Mata Air Alami di Gorontalo ke Rumah dan Kantor Anda
+    </h3>
+    <p>
+        Selama lebih dari 12 tahun, kami telah menyediakan air yang berkualitas langsung ke rumah dan kantor Anda yang ada di gorontalo, menjamin kesegaran dan kemurnian setiap tetesnya.
+    </p>
+    <button class="glass-btn">BACA SELENGKAPNYA</button>
+</div>
+
     </section>
     <section class="products" id="products">
-        <h4>Our Products </h4>
+        <h4>Produk Kami </h4>
         <div class="product-container">
             <div class="product">
                 <div class="product-img">
                     <span class="big-bubble"></span>
                     <span class="small-bubble"></span>
-                    <img src="{{ asset('landing/images/product-1') }}.png" />
+                    <img src="{{ asset('landing/images/galon') }}.png" style="width: 150px !important; height: auto !important;"/>
                 </div>
                 <div class="product-info">
-                    <h5>1 L Spring Water in Glass</h5>
-                    <h6>$10</h6>
-                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
-                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
-                        drink at any weather and is a reasonable offer for any budget.
+                    <h5>AIR MINERAL BONEVA - Galon 19 L</h5>
+                    <h6>Rp 38.500,00</h6>
+                    <span><i class='bx bx-info-circle'></i> UNTUK KEGUNAAN SEHARI-HARI</span>
+                    <p>
+                       Air ini sangat cocok untuk kebutuhan sehari-hari, baik untuk diminum dalam segala cuaca maupun untuk dibagikan kepada keluarga. Dengan harga yang terjangkau, Boneva selalu menjadi pilihan tepat bagi semua kalangan.
+                    </p>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <span class="big-bubble"></span>
+                    <span class="small-bubble"></span>
+
+                    <img src="{{ asset('landing/images/gelas') }}.png" style="width: 190px !important; height: auto !important;"/>
+                </div>
+                <div class="product-info">
+                    <h5>AIR MINERAL BONEVA - Cup 220 Ml</h5>
+                    <h6>Rp 1.000,00</h6>
+                    <span><i class='bx bx-info-circle'></i> UNTUK KEGUNAAN SEHARI-HARI</span>
+                    <p>
+                       Air ini sangat cocok untuk kebutuhan sehari-hari, baik untuk diminum dalam segala cuaca maupun untuk dibagikan kepada keluarga. Dengan harga yang terjangkau, Boneva selalu menjadi pilihan tepat bagi semua kalangan.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="product-container">
+            <div class="product">
+                <div class="product-img">
+                    <span class="big-bubble"></span>
+                    <span class="small-bubble"></span>
+                    <img src="{{ asset('landing/images/botol') }}.png" style="width: 93px !important; height: auto !important;"/>
+                </div>
+                <div class="product-info">
+                    <h5>AIR MINERAL BONEVA - Botol 600 Ml</h5>
+                    <h6>Rp 3.000,00</h6>
+                    <span><i class='bx bx-info-circle'></i> UNTUK KEGUNAAN SEHARI-HARI</span>
+                    <p>
+                       Air ini sangat cocok untuk kebutuhan sehari-hari, baik untuk diminum dalam segala cuaca maupun untuk dibagikan kepada keluarga. Dengan harga yang terjangkau, Boneva selalu menjadi pilihan tepat bagi semua kalangan.
                     </p>
                 </div>
             </div>
@@ -175,85 +224,44 @@
                     <img src="{{ asset('landing/images/product-1') }}.png" />
                 </div>
                 <div class="product-info">
-                    <h5>1 L Spring Water in Glass</h5>
-                    <h6>$10</h6>
-                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
-                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
-                        drink at any weather and is a reasonable offer for any budget.
+                    <h5>AIR MINERAL BONEVA - Botol 1.500 Ml</h5>
+                    <h6>Rp 7.800,00</h6>
+                    <span><i class='bx bx-info-circle'></i> UNTUK KEGUNAAN SEHARI-HARI</span>
+                    <p>
+                       Air ini sangat cocok untuk kebutuhan sehari-hari, baik untuk diminum dalam segala cuaca maupun untuk dibagikan kepada keluarga. Dengan harga yang terjangkau, Boneva selalu menjadi pilihan tepat bagi semua kalangan.
                     </p>
                 </div>
             </div>
         </div>
-        <div class="product-container">
-            <div class="product">
-                <div class="product-img">
-                    <span class="big-bubble"></span>
-                    <span class="small-bubble"></span>
-                    <img src="{{ asset('landing/images/product-1') }}.png" />
-                </div>
-                <div class="product-info">
-                    <h5>1 L Spring Water in Glass</h5>
-                    <h6>$10</h6>
-                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
-                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
-                        drink at any weather and is a reasonable offer for any budget.
-                    </p>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-img">
-                    <span class="big-bubble"></span>
-                    <span class="small-bubble"></span>
-
-                    <img src="{{ asset('landing/images/product-1') }}.png" />
-                </div>
-                <div class="product-info">
-                    <h5>1 L Spring Water in Glass</h5>
-                    <h6>$10</h6>
-                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
-                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
-                        drink at any weather and is a reasonable offer for any budget.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <button class="produtcs-btn">VIEW MORE</button>
+        <button class="produtcs-btn">LIHAT LEBIH LANJUT</button>
     </section>
     <section class="customer-service" id="service">
-        <h3>We Work to Offer the Best
-            <br /> Customer Service
-        </h3>
+    <h3>Kami Berusaha Menyediakan
+    <br /> Pelayanan Terbaik untuk Pelanggan
+</h3>
+
         <div class="services">
             <div class="service">
                 <i class='bx bx-mobile-alt'></i>
                 <div>
-                    <h4>Protection from Bacteria</h4>
-                    <p>Though spring water is naturally clean, we try our best to make sure that our water is
-                        bacteria-free at all production stages.
-                    </p>
+                <h4>Perlindungan dari Bakteri</h4>
+                <p>Meskipun air mata air secara alami bersih, kami berusaha sebaik mungkin untuk memastikan bahwa air kami bebas dari bakteri di semua tahap produksi.</p>
                 </div>
 
             </div>
             <div class="service">
                 <i class='bx bx-package'></i>
                 <div>
-                    <h4>No Contaminants
-                    </h4>
-                    <p>
-                        We control the production process of our water to make sure you receive the best product from
-                        the company, which you can trust.
+                <h4>Rasa Segar yang Alami</h4>
+                <p>Sumber air kami berasal dari pegunungan yang bersih, memberikan rasa segar dan alami yang tak tertandingi. Setiap tegukan membawa kesegaran dari alam langsung ke Anda.</p>
                 </div>
 
             </div>
             <div class="service">
                 <i class='bx bx-heart'></i>
                 <div>
-                    <h4>Automated Bottling Lines
-                    </h4>
-                    <p>
-                        The process of bottling the spring water at our plant is fully automatized. However, we always
-                        control it to ensure the high quality.
-                    </p>
+                <h4>Saluran Pengemasan Otomatis</h4>
+                <p>Proses pengemasan air mata air di pabrik kami sepenuhnya otomatis. Namun, kami selalu mengawasinya untuk memastikan kualitas yang tinggi.</p>
 
                 </div>
             </div>
@@ -261,7 +269,7 @@
 
     </section>
     <section class="testimonials" id="testimonial">
-        <h3>Testimonials </h3>
+        <h3>Testimoni </h3>
 
 
         <div class="testimonial-container">
@@ -272,9 +280,10 @@
                     <div class="swiper-slide">
                         <div class="testimonial">
                             <i class='bx bxs-quote-left'></i>
-                            <p>I am so grateful for this water delivery to our home! We’ve got our energy back after
-                                just a short time and we feel vibrant again! I especially like sparkling water.
-                            </p>
+                            <p>
+    Saya sangat bersyukur atas pengiriman air ini ke rumah kami! Kami kembali mendapatkan energi setelah waktu yang singkat dan merasa segar kembali! Saya terutama menyukai air mineral berkarbonasi.
+</p>
+
                             <div class="user">
                                 <img src="{{ asset('landing/images/testimonials-person') }}-1.jpg" />
                                 <div class="user-info">
@@ -287,10 +296,10 @@
                     <div class="swiper-slide">
                         <div class="testimonial">
                             <i class='bx bxs-quote-left'></i>
-                            <p>I have looked far and wide in Los Angeles County for the purest water, and BONEVA is
-                                without a doubt the cleanest, freshest, most vital water available and it is also
-                                affordable.
-                            </p>
+                            <p>
+    Saya telah mencari di berbagai tempat di Kabupaten Gorontalo untuk menemukan air paling murni, dan BONEVA tanpa ragu adalah air yang paling bersih, segar, dan menyehatkan yang tersedia, serta harganya juga terjangkau.
+</p>
+
                             <div class="user">
                                 <img src="{{ asset('landing/images/testimonials-person') }}-2.jpg" />
                                 <div class="user-info">
@@ -303,10 +312,26 @@
                     <div class="swiper-slide">
                         <div class="testimonial">
                             <i class='bx bxs-quote-left'></i>
-                            <p>I have looked far and wide in Los Angeles County for the purest water, and BONEVA is
-                                without a doubt the cleanest, freshest, most vital water available and it is also
-                                affordable.
-                            </p>
+                            <p>
+    Saya telah mencari di berbagai tempat di Kabupaten Gorontalo untuk menemukan air paling murni, dan BONEVA tanpa ragu adalah air yang paling bersih, segar, dan menyehatkan yang tersedia, serta harganya juga terjangkau.
+</p>
+
+                            <div class="user">
+                                <img src="{{ asset('landing/images/testimonials-person') }}-2.jpg" />
+                                <div class="user-info">
+                                    <span class="user-name">Harold Barnett</span>
+                                    <span class="user-type">Regular Client</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <i class='bx bxs-quote-left'></i>
+                            <p>
+    Saya telah mencari ke berbagai tempat di Kabupaten Gorontalo untuk menemukan air yang paling murni, dan tanpa diragukan lagi, BONEVA adalah air yang paling bersih, segar, dan menyehatkan yang tersedia, serta harganya juga sangat terjangkau.
+</p>
+
                             <div class="user">
                                 <img src="{{ asset('landing/images/testimonials-person') }}-2.jpg" />
                                 <div class="user-info">
@@ -323,81 +348,77 @@
         </div>
     </section>
     <section class="contact" id="contact">
-        <div class="contact-from">
-            <h3>Contact Us
-            </h3>
-            <div class="inputs">
-                <div>
-                    <label>First Name</label>
-                    <input />
-                </div>
-                <div style="margin-left: 3rem;">
-                    <label>Last Name</label>
-                    <input />
-                </div>
-            </div>
-            <div class="inputs">
-                <div>
-                    <label>First Name</label>
-                    <input />
-                </div>
-                <div style="margin-left: 3rem;">
-                    <label>Last Name</label>
-                    <input />
-                </div>
-            </div>
-            <div style="margin-top: 1rem;">
-                <label>Your Message</label>
-                <textarea></textarea>
-            </div>
+    <div class="contact-from">
+        <h3>Hubungi Kami
+        </h3>
+        <div class="inputs">
             <div>
-                <button>SEND MESSAGE</button>
-                <span>or use</span>
-                <button class="outline-button">
-                    <i class='bx bxl-messenger'></i>
-                    MESSENGER</button>
+                <label>Nama Depan</label>
+                <input />
             </div>
-
+            <div style="margin-left: 3rem;">
+                <label>Nama Belakang</label>
+                <input />
+            </div>
         </div>
-        <img src="{{ asset('landing/images/contact.png') }}" />
-    </section>
-    <section class="footer">
-        <div class="sectionWave footer-wave">
-            <svg x="0px" y="0px" viewBox="0 0 1920 45" width="1920" height="45px" preserveAspectRatio="none">
-                <style type="text/css"></style>
-                <path
-                    d="M1920,0c-82.8,0-108.8,44.4-192,44.4c-78.8,0-116.5-43.7-192-43.7c-77.1,0-115.9,44.4-192,44.4c-78.2,0-114.6-44.4-192-44.4c-78.4,0-115.3,44.4-192,44.4C883.1,45,841,0.6,768,0.6C691,0.6,652.8,45,576,45C502.4,45,461.9,0.6,385,0.6C306.5,0.6,267.9,45,191,45C115.1,45,78,0.6,0,0.6V45h1920V0z">
-                </path>
-            </svg>
+        <div class="inputs">
+            <div>
+                <label>Email</label>
+                <input />
+            </div>
+            <div style="margin-left: 3rem;">
+                <label>No. Telepon</label>
+                <input />
+            </div>
         </div>
-        <div class="footer-inner ">
-            <div class="footer-column about">
-                <h5>About Us</h5>
-                <p>BONEVA is one of the leading spring water providers in the USA. We bottle and deliver bacteria-free
-                    spring water throughout the country covering all water needs and tastes. We are proud to be the
-                    nation’s #1 water provider!
-                </p>
-            </div>
-            <div class="footer-column">
-                <h5>Contact Information </h5>
-                <div><i class='bx bxs-location-plus'></i> <span>2130 Fulton Street <br />
-                        San Diego, CA 94117-1080 USA</span> </div>
-                <div><i class='bx bxs-phone-call'></i><span>1-800-1234-678</span> </div>
-                <div><i class='bx bxs-envelope'></i> <span>info@demolink.org</span> </div>
-            </div>
-            <div class="footer-column">
-                <h5>Newsletter </h5>
-                <p>Sign up to our newsletter and be the first to know about the latest news, special offers, events, and
-                    discounts.
-                </p>
-                <div>
-                    <input class="news-input" />
-                    <a class="send-btn"><i class='bx bx-envelope'></i></a>
-                </div>
-            </div>
+        <div style="margin-top: 1rem;">
+            <label>Pesan Anda</label>
+            <textarea></textarea>
+        </div>
+        <div>
+            <button>KIRIM PESAN</button>
+            <span>atau gunakan</span>
+            <button class="outline-button">
+                <i class='bx bxl-messenger'></i>
+                MESSENGER</button>
         </div>
 
-    </section>
+    </div>
+    <img src="{{ asset('landing/images/contact.png') }}" />
+</section>
+<section class="footer">
+    <div class="sectionWave footer-wave">
+        <svg x="0px" y="0px" viewBox="0 0 1920 45" width="1920" height="45px" preserveAspectRatio="none">
+            <path
+                d="M1920,0c-82.8,0-108.8,44.4-192,44.4c-78.8,0-116.5-43.7-192-43.7c-77.1,0-115.9,44.4-192,44.4c-78.2,0-114.6-44.4-192-44.4c-78.4,0-115.3,44.4-192,44.4C883.1,45,841,0.6,768,0.6C691,0.6,652.8,45,576,45C502.4,45,461.9,0.6,385,0.6C306.5,0.6,267.9,45,191,45C115.1,45,78,0.6,0,0.6V45h1920V0z">
+            </path>
+        </svg>
+    </div>
+    <div class="footer-inner">
+        <div class="footer-column about">
+            <h5>Tentang Kami</h5>
+            <p>BONEVA merupakan salah satu penyedia air minum terbaik di Gorontalo. Kami memproduksi dan mengirimkan air bersih yang bebas bakteri di seluruh wilayah, memenuhi semua kebutuhan dan selera pelanggan. Kami bangga menjadi pilihan utama dalam penyediaan air bersih di Gorontalo!
+            </p>
+        </div>
+        <div class="footer-column">
+            <h5>Informasi Kontak </h5>
+            <div><i class='bx bxs-location-plus'></i> <span>Jl. Nani Wartabone No. 25 <br />
+                    Gorontalo, Indonesia</span> </div>
+            <div><i class='bx bxs-phone-call'></i><span>+62-811-1234-567</span> </div>
+            <div><i class='bx bxs-envelope'></i> <span>info@boneva.id</span> </div>
+        </div>
+        <div class="footer-column">
+            <h5>Newsletter </h5>
+            <p>Daftarkan diri Anda untuk newsletter kami dan jadilah yang pertama tahu tentang berita terbaru, penawaran spesial, acara, dan diskon.
+            </p>
+            <div>
+                <input class="news-input" placeholder="Email Anda" />
+                <a class="send-btn"><i class='bx bx-envelope'></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 </body>
 <script src="https://unpkg.com/scrollreveal"></script>
