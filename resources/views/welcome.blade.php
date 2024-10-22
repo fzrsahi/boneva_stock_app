@@ -1,129 +1,415 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
+    <link href="./style.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+</head>
 
-        <!-- Styles -->
-        <style>
-            body {
-            background-image: url('image/4.jpeg');
-            background-size: cover; 
-            background-position: center;
-            background-repeat: no-repeat; 
-            }
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="menu-btn" onclick="menu()"><i class='bx bx-menu'></i></span>
+            <img src="{{ asset('landing/images/logo.png') }}" style="height: 100px;width: 100px" />
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#features">FEATURES</a></li>
+                <li><a href="#products">PRODUCTS</a></li>
+                <li><a href="#service">SERVICES</a></li>
+                <li><a href="#testimonial">TESTIMONIALS</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+            </ul>
+        </nav>
+        <div class="side-menu close" id="side-menu">
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#features">FEATURES</a></li>
+                <li><a href="#products">PRODUCTS</a></li>
+                <li><a href="#service">SERVICES</a></li>
+                <li><a href="#testimonial">TESTIMONIALS</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+            </ul>
+        </div>
+        <span class="call-btn"><i class='bx bxs-phone-call'></i></span>
+    </header>
+    <main id="home">
+        <div class="my-slider">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="{{ asset('landing/images/bg.jpg') }}" class="bg-img" />
 
-            nav {
-            position: absolute;
-            bottom:120%;
-            left: 86%;
-            padding: 0;
-        }
+                        <div class="slide-info">
+                            <span>Selamat Datang di Website Resmi BONEVA </span>
+                            <h1>Air Minum Lokal</h1>
+                            <h2>Dari Gorontalo </h2>
+                            <p>Boneva Telah berdiri sejak 2014, dan menjadi salah satu pilihan Air minum berkualitas di
+                                Gorontalo.</p>
+                            <button>Pelajari Selengkapnya</button>
 
-        nav a {
-            color: black;
-            text-decoration: none;
-            padding: 8px 16px;
-            background-color: rgba(255, 255, 255, 0.8); /* Adding a slight background for visibility */
-            border-radius: 5px;
-        }
-
-        .content {
-            text-align: center;
-            color: #007BFF;
-            font-size: 72px;
-            padding-top: 20vh;
-        }
-
-        footer{
-            color: black;
-            text-decoration: none;
-            border-radius: 5px;
-            bottom: 90% !important;
-        }
-
-        .fade-out {
-            opacity: 1;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .fade-out-active {
-            opacity: 0;
-        }
-        
-        *,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.absolute{position:absolute}.relative{position:relative}.-left-20{left:-5rem}.top-0{top:0px}.-bottom-16{bottom:-4rem}.-left-16{left:-4rem}.-mx-3{margin-left:-0.75rem;margin-right:-0.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.aspect-video{aspect-ratio:16 / 9}.size-12{width:3rem;height:3rem}.size-5{width:1.25rem;height:1.25rem}.size-6{width:1.5rem;height:1.5rem}.h-12{height:3rem}.h-40{height:10rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-full{width:100%}.w-\[calc\(100\%\+8rem\)\]{width:calc(100% + 8rem)}.w-auto{width:auto}.max-w-\[877px\]{max-width:877px}.max-w-2xl{max-width:42rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.items-stretch{align-items:stretch}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.rounded-\[10px\]{border-radius:10px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-sm{border-radius:0.125rem}.bg-\[\#FF2D20\]\/10{background-color:rgb(255 45 32 / 0.1)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.from-transparent{--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-white{--tw-gradient-to:rgb(255 255 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #fff var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-white{--tw-gradient-to:#fff var(--tw-gradient-to-position)}.stroke-\[\#FF2D20\]{stroke:#FF2D20}.object-cover{object-fit:cover}.object-top{object-position:top}.p-6{padding:1.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.font-sans{font-family:Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-sm\/relaxed{font-size:0.875rem;line-height:1.625}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-semibold{font-weight:600}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-\[0px_14px_34px_0px_rgba\(0\2c 0\2c 0\2c 0\.08\)\]{--tw-shadow:0px 14px 34px 0px rgba(0,0,0,0.08);--tw-shadow-colored:0px 14px 34px 0px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-transparent{--tw-ring-color:transparent}.ring-white\/\[0\.05\]{--tw-ring-color:rgb(255 255 255 / 0.05)}.drop-shadow-\[0px_4px_34px_rgba\(0\2c 0\2c 0\2c 0\.06\)\]{--tw-drop-shadow:drop-shadow(0px 4px 34px rgba(0,0,0,0.06));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-\[0px_4px_34px_rgba\(0\2c 0\2c 0\2c 0\.25\)\]{--tw-drop-shadow:drop-shadow(0px 4px 34px rgba(0,0,0,0.25));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.selection\:bg-\[\#FF2D20\] *::selection{--tw-bg-opacity:1;background-color:rgb(255 45 32 / var(--tw-bg-opacity))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.selection\:bg-\[\#FF2D20\]::selection{--tw-bg-opacity:1;background-color:rgb(255 45 32 / var(--tw-bg-opacity))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity))}.hover\:text-black\/70:hover{color:rgb(0 0 0 / 0.7)}.hover\:ring-black\/20:hover{--tw-ring-color:rgb(0 0 0 / 0.2)}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus-visible\:ring-1:focus-visible{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus-visible\:ring-\[\#FF2D20\]:focus-visible{--tw-ring-opacity:1;--tw-ring-color:rgb(255 45 32 / var(--tw-ring-opacity))}@media (min-width: 640px){.sm\:size-16{width:4rem;height:4rem}.sm\:size-6{width:1.5rem;height:1.5rem}.sm\:pt-5{padding-top:1.25rem}}@media (min-width: 768px){.md\:row-span-3{grid-row:span 3 / span 3}}@media (min-width: 1024px){.lg\:col-start-2{grid-column-start:2}.lg\:h-16{height:4rem}.lg\:max-w-7xl{max-width:80rem}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:flex-col{flex-direction:column}.lg\:items-end{align-items:flex-end}.lg\:justify-center{justify-content:center}.lg\:gap-8{gap:2rem}.lg\:p-10{padding:2.5rem}.lg\:pb-10{padding-bottom:2.5rem}.lg\:pt-0{padding-top:0px}.lg\:text-\[\#FF2D20\]{--tw-text-opacity:1;color:rgb(255 45 32 / var(--tw-text-opacity))}}@media (prefers-color-scheme: dark){.dark\:block{display:block}.dark\:hidden{display:none}.dark\:bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity))}.dark\:bg-zinc-900{--tw-bg-opacity:1;background-color:rgb(24 24 27 / var(--tw-bg-opacity))}.dark\:via-zinc-900{--tw-gradient-to:rgb(24 24 27 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #18181b var(--tw-gradient-via-position), var(--tw-gradient-to)}.dark\:to-zinc-900{--tw-gradient-to:#18181b var(--tw-gradient-to-position)}.dark\:text-white\/50{color:rgb(255 255 255 / 0.5)}.dark\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:text-white\/70{color:rgb(255 255 255 / 0.7)}.dark\:ring-zinc-800{--tw-ring-opacity:1;--tw-ring-color:rgb(39 39 42 / var(--tw-ring-opacity))}.dark\:hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:hover\:text-white\/70:hover{color:rgb(255 255 255 / 0.7)}.dark\:hover\:text-white\/80:hover{color:rgb(255 255 255 / 0.8)}.dark\:hover\:ring-zinc-700:hover{--tw-ring-opacity:1;--tw-ring-color:rgb(63 63 70 / var(--tw-ring-opacity))}.dark\:focus-visible\:ring-\[\#FF2D20\]:focus-visible{--tw-ring-opacity:1;--tw-ring-color:rgb(255 45 32 / var(--tw-ring-opacity))}.dark\:focus-visible\:ring-white:focus-visible{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity))}}
-        </style>
-    </head>
-    <body class="font-sans antialiased dark:bg-white dark:text-white/50" >
-        <div class="bg-gray-50 text-black/50 dark:bg-white dark:text-white/50">
-            <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        <div class="flex lg:justify-center lg:col-start-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="600" height="175">
-                            <style>
-                                .text { font-family: 'Arial', sans-serif; font-weight: bold; }
-                                .blue { fill: #0077B3; }
-                                .light-blue { fill: #00ADEF; }
-                                .wave { fill: #0099CC; }
-                            </style>
-                            <g>
-                                <!-- Huruf B -->
-                                <text x="10" y="100" class="text blue" font-size="50">B</text>
-                                <!-- Huruf O dengan gelombang -->
-                                <text x="50" y="100" class="text blue" font-size="50">O</text>
-                                <!-- Huruf N -->
-                                <text x="100" y="100" class="text blue" font-size="50">N</text>
-                                <!-- Huruf E -->
-                                <text x="150" y="100" class="text blue" font-size="50">E</text>
-                                <!-- Huruf V -->
-                                <text x="200" y="100" class="text blue" font-size="50">V</text>
-                                <!-- Huruf A -->
-                                <text x="250" y="100" class="text blue" font-size="50">A</text>
-                            </g>
-                        </svg>
                         </div>
-                        @if (Route::has('login'))
-                            <nav>
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-black  dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-black  dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </a>
+                    </div>
+                    <div class="swiper-slide"><img src="{{ asset('landing/images/bg.jpg') }}" class="bg-img" />
+                        <div class="slide-info">
+                            <span>Selamat Datang di Website Resmi BONEVA </span>
+                            <h1>Air Minum Lokal</h1>
+                            <h2>Dari Gorontalo </h2>
+                            <p>Boneva Telah berdiri sejak 2014, dan menjadi salah satu pilihan Air minum berkualitas di
+                                Gorontalo.</p>
+                            <button>Pelajari Selengkapnya</button>
 
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-black  dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
-                        @endif
-                    </header>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+        <div class="sectionWave">
+            <svg x="0px" y="0px" viewBox="0 0 1920 45" width="1920" height="45px" preserveAspectRatio="none">
+                <style type="text/css"></style>
+                <path
+                    d="M1920,0c-82.8,0-108.8,44.4-192,44.4c-78.8,0-116.5-43.7-192-43.7c-77.1,0-115.9,44.4-192,44.4c-78.2,0-114.6-44.4-192-44.4c-78.4,0-115.3,44.4-192,44.4C883.1,45,841,0.6,768,0.6C691,0.6,652.8,45,576,45C502.4,45,461.9,0.6,385,0.6C306.5,0.6,267.9,45,191,45C115.1,45,78,0.6,0,0.6V45h1920V0z">
+                </path>
+            </svg>
+        </div>
+    </main>
+    <section class="description" id="about">
+        <div class="flex-conatiner">
+            <div class="col-7">
+                <img src="{{ asset('landing/images/index-01') }}.png" />
+            </div>
+            <div class="col-5">
+                <h3>
+                    Water Purified by Nature and Delivered with Love
+                </h3>
+                <p>
+                    Our pristine water flows from the Penobscot Ridge Mountains. The bountiful “stream” is the
+                    wellspring that constantly provides fresh, clean water to our well located just a few steps away
+                    from our plant.
+                </p>
+                <button>Pelajari Selengkapnya</button>
+            </div>
+        </div>
+    </section>
+    <section class="attributes" id="features">
+        <div class="attribute">
+            <i class='bx bxs-shield'></i>
+            <div>
+                <h4>Protection from Bacteria</h4>
+                <p>Though spring water is naturally clean, we try our best to make sure that our water is bacteria-free
+                    at all production stages.
+                </p>
+            </div>
 
-                    <footer class="py-16 text-center text-sm text-black dark:text-black/70">
-                        Boneva bone bolango 2 oktober 2024
-                    </footer>
+        </div>
+        <div class="attribute">
+            <i class='bx bxs-leaf'></i>
+            <div>
+                <h4>No Contaminants
+                </h4>
+                <p>
+                    We control the production process of our water to make sure you receive the best product from the
+                    company, which you can trust.
+            </div>
+
+        </div>
+        <div class="attribute">
+            <i class='bx bxs-droplet'></i>
+            <div>
+                <h4>Automated Bottling Lines
+                </h4>
+                <p>
+                    The process of bottling the spring water at our plant is fully automatized. However, we always
+                    control it to ensure the high quality.
+                </p>
+
+            </div>
+        </div>
+    </section>
+    <section class="landscape" style="background: url({{ asset('landing/images/background.jpg') }})">
+        <div>
+            <h3>
+                From an Artesian Well to Home and Office
+            </h3>
+            <p>
+                For more than 60 years, we have been supplying the American homes and offices with high-quality spring
+                water from a pristine stream near our plant.
+            </p>
+            <button class="glass-btn">READ MORE</button>
+        </div>
+    </section>
+    <section class="products" id="products">
+        <h4>Our Products </h4>
+        <div class="product-container">
+            <div class="product">
+                <div class="product-img">
+                    <span class="big-bubble"></span>
+                    <span class="small-bubble"></span>
+                    <img src="{{ asset('landing/images/product-1') }}.png" />
+                </div>
+                <div class="product-info">
+                    <h5>1 L Spring Water in Glass</h5>
+                    <h6>$10</h6>
+                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
+                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
+                        drink at any weather and is a reasonable offer for any budget.
+                    </p>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <span class="big-bubble"></span>
+                    <span class="small-bubble"></span>
+
+                    <img src="{{ asset('landing/images/product-1') }}.png" />
+                </div>
+                <div class="product-info">
+                    <h5>1 L Spring Water in Glass</h5>
+                    <h6>$10</h6>
+                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
+                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
+                        drink at any weather and is a reasonable offer for any budget.
+                    </p>
                 </div>
             </div>
         </div>
-    </body>
+        <div class="product-container">
+            <div class="product">
+                <div class="product-img">
+                    <span class="big-bubble"></span>
+                    <span class="small-bubble"></span>
+                    <img src="{{ asset('landing/images/product-1') }}.png" />
+                </div>
+                <div class="product-info">
+                    <h5>1 L Spring Water in Glass</h5>
+                    <h6>$10</h6>
+                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
+                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
+                        drink at any weather and is a reasonable offer for any budget.
+                    </p>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <span class="big-bubble"></span>
+                    <span class="small-bubble"></span>
+
+                    <img src="{{ asset('landing/images/product-1') }}.png" />
+                </div>
+                <div class="product-info">
+                    <h5>1 L Spring Water in Glass</h5>
+                    <h6>$10</h6>
+                    <span><i class='bx bx-info-circle'></i> FOR DAILY USE</span>
+                    <p>Enjoy your favorite spring water in the most popular shape! This water is great to share and
+                        drink at any weather and is a reasonable offer for any budget.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button class="produtcs-btn">VIEW MORE</button>
+    </section>
+    <section class="customer-service" id="service">
+        <h3>We Work to Offer the Best
+            <br /> Customer Service
+        </h3>
+        <div class="services">
+            <div class="service">
+                <i class='bx bx-mobile-alt'></i>
+                <div>
+                    <h4>Protection from Bacteria</h4>
+                    <p>Though spring water is naturally clean, we try our best to make sure that our water is
+                        bacteria-free at all production stages.
+                    </p>
+                </div>
+
+            </div>
+            <div class="service">
+                <i class='bx bx-package'></i>
+                <div>
+                    <h4>No Contaminants
+                    </h4>
+                    <p>
+                        We control the production process of our water to make sure you receive the best product from
+                        the company, which you can trust.
+                </div>
+
+            </div>
+            <div class="service">
+                <i class='bx bx-heart'></i>
+                <div>
+                    <h4>Automated Bottling Lines
+                    </h4>
+                    <p>
+                        The process of bottling the spring water at our plant is fully automatized. However, we always
+                        control it to ensure the high quality.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="testimonials" id="testimonial">
+        <h3>Testimonials </h3>
+
+
+        <div class="testimonial-container">
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <i class='bx bxs-quote-left'></i>
+                            <p>I am so grateful for this water delivery to our home! We’ve got our energy back after
+                                just a short time and we feel vibrant again! I especially like sparkling water.
+                            </p>
+                            <div class="user">
+                                <img src="{{ asset('landing/images/testimonials-person') }}-1.jpg" />
+                                <div class="user-info">
+                                    <span class="user-name">Harold Barnett</span>
+                                    <span class="user-type">Regular Client</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <i class='bx bxs-quote-left'></i>
+                            <p>I have looked far and wide in Los Angeles County for the purest water, and BONEVA is
+                                without a doubt the cleanest, freshest, most vital water available and it is also
+                                affordable.
+                            </p>
+                            <div class="user">
+                                <img src="{{ asset('landing/images/testimonials-person') }}-2.jpg" />
+                                <div class="user-info">
+                                    <span class="user-name">Harold Barnett</span>
+                                    <span class="user-type">Regular Client</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <i class='bx bxs-quote-left'></i>
+                            <p>I have looked far and wide in Los Angeles County for the purest water, and BONEVA is
+                                without a doubt the cleanest, freshest, most vital water available and it is also
+                                affordable.
+                            </p>
+                            <div class="user">
+                                <img src="{{ asset('landing/images/testimonials-person') }}-2.jpg" />
+                                <div class="user-info">
+                                    <span class="user-name">Harold Barnett</span>
+                                    <span class="user-type">Regular Client</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <div class="contact-from">
+            <h3>Contact Us
+            </h3>
+            <div class="inputs">
+                <div>
+                    <label>First Name</label>
+                    <input />
+                </div>
+                <div style="margin-left: 3rem;">
+                    <label>Last Name</label>
+                    <input />
+                </div>
+            </div>
+            <div class="inputs">
+                <div>
+                    <label>First Name</label>
+                    <input />
+                </div>
+                <div style="margin-left: 3rem;">
+                    <label>Last Name</label>
+                    <input />
+                </div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <label>Your Message</label>
+                <textarea></textarea>
+            </div>
+            <div>
+                <button>SEND MESSAGE</button>
+                <span>or use</span>
+                <button class="outline-button">
+                    <i class='bx bxl-messenger'></i>
+                    MESSENGER</button>
+            </div>
+
+        </div>
+        <img src="{{ asset('landing/images/contact.png') }}" />
+    </section>
+    <section class="footer">
+        <div class="sectionWave footer-wave">
+            <svg x="0px" y="0px" viewBox="0 0 1920 45" width="1920" height="45px" preserveAspectRatio="none">
+                <style type="text/css"></style>
+                <path
+                    d="M1920,0c-82.8,0-108.8,44.4-192,44.4c-78.8,0-116.5-43.7-192-43.7c-77.1,0-115.9,44.4-192,44.4c-78.2,0-114.6-44.4-192-44.4c-78.4,0-115.3,44.4-192,44.4C883.1,45,841,0.6,768,0.6C691,0.6,652.8,45,576,45C502.4,45,461.9,0.6,385,0.6C306.5,0.6,267.9,45,191,45C115.1,45,78,0.6,0,0.6V45h1920V0z">
+                </path>
+            </svg>
+        </div>
+        <div class="footer-inner ">
+            <div class="footer-column about">
+                <h5>About Us</h5>
+                <p>BONEVA is one of the leading spring water providers in the USA. We bottle and deliver bacteria-free
+                    spring water throughout the country covering all water needs and tastes. We are proud to be the
+                    nation’s #1 water provider!
+                </p>
+            </div>
+            <div class="footer-column">
+                <h5>Contact Information </h5>
+                <div><i class='bx bxs-location-plus'></i> <span>2130 Fulton Street <br />
+                        San Diego, CA 94117-1080 USA</span> </div>
+                <div><i class='bx bxs-phone-call'></i><span>1-800-1234-678</span> </div>
+                <div><i class='bx bxs-envelope'></i> <span>info@demolink.org</span> </div>
+            </div>
+            <div class="footer-column">
+                <h5>Newsletter </h5>
+                <p>Sign up to our newsletter and be the first to know about the latest news, special offers, events, and
+                    discounts.
+                </p>
+                <div>
+                    <input class="news-input" />
+                    <a class="send-btn"><i class='bx bx-envelope'></i></a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{{ asset('landing/js/script.js') }}"></script>
+<script>
+    ScrollReveal().reveal("body > section", {
+        distance: '101%',
+        duration: 1200,
+        origin: 'top',
+        delay: 500
+    });
+</script>
+
 </html>
