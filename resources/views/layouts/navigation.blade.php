@@ -37,6 +37,9 @@
                     <x-nav-link :href="route('outlet.index')" :active="request()->routeIs('outlet.*')">
                         {{ __('Outlet') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.*')">
+                        {{ __('Karyawan') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Products') }}
+            {{ __('Karyawan') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -85,7 +85,7 @@
                     @endif
                     <div class="mb-3 grid grid-cols-5 items-center gap-5">
 
-                        <form class="col-span-4 w-full" action="{{ route('outlet.index') }}" method="GET">
+                        <form class="col-span-4 w-full" action="{{ route('employee.index') }}" method="GET">
                             @csrf
                             <label class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="default-search">Search</label>
@@ -100,7 +100,7 @@
                                 <input
                                     class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     id="default-search" name="search" type="text" value="{{ request('search') }}"
-                                    placeholder="Nama Outlet" />
+                                    placeholder="Nama Karyawan" />
                                 <button
                                     class="absolute bottom-2.5 end-2.5 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     type="submit">Search</button>
@@ -108,7 +108,7 @@
                         </form>
 
                         <a class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            type="button" href="{{ route('outlet.create') }}">Tambah Outlet +</a>
+                            type="button" href="{{ route('employee.create') }}">Tambah Karyawan +</a>
                     </div>
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -117,21 +117,27 @@
                                 class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th class="px-6 py-3" scope="col">
-                                        Nama Outlet
+                                        Nik
                                     </th>
                                     <th class="px-6 py-3" scope="col">
-                                        Deskripsi
+                                        Nama Lengkap
                                     </th>
                                     <th class="px-6 py-3" scope="col">
-                                        Nama Owner
-                                    <th class="px-6 py-3" scope="col">
-                                        Alamat
+                                        Photo Profile
                                     </th>
                                     <th class="px-6 py-3" scope="col">
-                                        Latitudu
+                                        Email
+                                    <th class="px-6 py-3" scope="col">
+                                        Nomor Telepon
                                     </th>
                                     <th class="px-6 py-3" scope="col">
-                                        Longtitude
+                                        Posisi / Jabatan
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Tanggal Bergabung
+                                    </th>
+                                    <th class="px-6 py-3" scope="col">
+                                        Tempat Bekerja
                                     </th>
                                     <th class="px-6 py-3" scope="col">
                                         Aksi
@@ -139,36 +145,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($outlets as $outlet)
+                                @foreach ($employees as $employee)
                                     <tr
                                         class="border-b odd:bg-white even:bg-gray-50 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800">
                                         <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                                             scope="row">
-                                            {{ $outlet->outlet_name }}
+                                            {{ $employee->nik }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            {{ $outlet->desc }}
+                                            {{ $employee->fullname }}
+                                        </td>
+                                        <td class="h-20 w-20 rounded-full bg-cover px-6 py-4">
+                                            <img src="{{ asset('profilephoto/' . $employee->profilephoto) }}"
+                                                alt="">
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $outlet->owner_name }}
+                                            {{ $employee->email }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $outlet->address }}
+                                            {{ $employee->phone_number }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $outlet->latitude }}
+                                            {{ $employee->job_title }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $outlet->langtitude }}
+                                            {{ $employee->hire_date }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $employee->department }}
                                         </td>
 
                                         <td class="px-6 py-4">
                                             <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                                href="{{ route('outlet.edit', ['outlet' => $outlet->id]) }}">Edit</a>
-                                            <span>|</span>
+                                                href="{{ route('employee.edit', ['employee' => $employee->uuid]) }}">Edit</a>
 
 
-                                            <form action="{{ route('outlet.destroy', ['outlet' => $outlet->id]) }}"
+                                            <form
+                                                action="{{ route('employee.destroy', ['employee' => $employee->uuid]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE') <!-- Ini untuk menyimulasikan metode DELETE -->
@@ -185,7 +198,7 @@
                     </div>
                     <div class="mt-3">
 
-                        {{ $outlets->links() }}
+                        {{ $employees->links() }}
                     </div>
 
                 </div>

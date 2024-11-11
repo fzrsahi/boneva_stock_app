@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('solds', SoldController::class);
     Route::resource('simulations', SimulationController::class);
     Route::resource('outlet', OutletController::class);
+    Route::resource('employee', EmployeeController::class);
     // Route::delete('/outlet/destroy/{outlet}', [ProfileController::class, 'destroy'])->name('outlet.destroy');
 });
 

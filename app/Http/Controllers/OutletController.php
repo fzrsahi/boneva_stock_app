@@ -14,12 +14,14 @@ class OutletController extends Controller
     public function index(Request $request)
     {
         // Mendapatkan kata kunci dari input pengguna
-        $query = $request->input('query');
+        $search = $request->input('search');
+        if ($search) {
+            # code...
+            $outlets = Outlet::where('outlet_name', 'like', '%' . $search . '%')->orderBy('outlet_name', 'DESC')->paginate(2)->appends(['search' => $search]);
+        } else {
 
-        $outlets = Outlet::when($query, function ($queryBuilder) use ($query) {
-            return $queryBuilder->where('title', 'LIKE', "%$query%")
-                ->orWhere('content', 'LIKE', "%$query%");
-        })->paginate(5);
+            $outlets = Outlet::orderBy('outlet_name', 'DESC')->paginate(2); // Ganti 10 dengan jumlah item per halaman yang diinginkan
+        }
 
         return view('pages.outlets.index', compact('outlets'));
     }
