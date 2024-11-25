@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_COMPOSE_VERSION = '2.21.0'
-        APP_NAME = 'boneva-app'
+        APP_NAME = 'boneva'
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
