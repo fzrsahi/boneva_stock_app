@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: boneva-app
+    networks:
+      - boneva
+      - db_postgres
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: boneva-nginx
+    ports:
+      - 4004:80
+    networks:
+      - boneva
+    depends_on:
+      - app
+
+networks:
+  boneva:
+    driver: bridge
+  db_postgres:
+    external: true
+  shared-network:
+    external: true
