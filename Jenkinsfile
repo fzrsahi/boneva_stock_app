@@ -37,16 +37,6 @@ pipeline {
                     // Start new containers
                     sh 'docker compose up -d'
 
-                    // Run migrations
-                    sh 'docker compose exec -T app php artisan migrate --force'
-
-                    // Clear cache
-                    sh '''
-                        docker compose exec -T app php artisan config:cache
-                        docker compose exec -T app php artisan route:cache
-                        docker compose exec -T app php artisan view:cache
-                    '''
-
                     // Set proper permissions
                     sh '''
                         docker compose exec -T app chmod -R 777 storage
