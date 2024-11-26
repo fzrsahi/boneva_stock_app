@@ -36,7 +36,7 @@ pipeline {
 
                     // Migrasi database dengan rollback otomatis jika gagal
                     sh '''
-                        docker compose run --rm app php artisan migrate \
+                        docker compose exec app php artisan migrate \
                             --force \
                             --no-interaction
                     '''
