@@ -84,12 +84,12 @@ pipeline {
 
         failure {
             script {
-                // Rollback dengan lebih aman
-                sh '''
-                    docker compose down
-                    docker compose up -d --no-deps app nginx
-                    docker compose run --rm app php artisan migrate:rollback
-                '''
+                // // Rollback dengan lebih aman
+                // sh '''
+                //     docker compose down
+                //     docker compose up -d --no-deps app nginx
+                //     docker compose run --rm app php artisan migrate:rollback
+                // '''
                 echo 'Deployment failed! Rolled back to previous version.'
             }
         }
