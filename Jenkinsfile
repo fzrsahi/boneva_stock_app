@@ -34,6 +34,8 @@ pipeline {
                     // Start kontainer baru
                     sh 'docker compose up -d'
 
+                    sh 'sleep 10'
+
                     // Migrasi database dengan rollback otomatis jika gagal
                     sh '''
                         docker compose exec app php artisan migrate \
