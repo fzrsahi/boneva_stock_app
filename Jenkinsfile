@@ -98,10 +98,8 @@ pipeline {
             // Bersihkan docker secara aman
             sh '''
                 docker system prune -af --filter "label!=keep"
+                docker volume prune -f
             '''
-
-            // Bersihkan workspace
-            cleanWs()
         }
     }
 }
