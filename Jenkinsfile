@@ -34,13 +34,6 @@ pipeline {
                     // Start kontainer baru
                     sh 'docker compose up -d'
 
-                    // Migrasi database dengan rollback otomatis jika gagal
-                    sh '''
-                        docker compose run --rm app php artisan migrate \
-                            --force \
-                            --no-interaction
-                    '''
-
                     // Set permission yang aman
                     sh '''
                         docker compose exec -T app chown -R www-data:www-data storage
