@@ -35,11 +35,11 @@ pipeline {
                     sh 'docker compose up -d'
 
                     // Migrasi database dengan rollback otomatis jika gagal
-                    // sh '''
-                    //     docker compose exec app php artisan migrate \
-                    //         --force \
-                    //         --no-interaction
-                    // '''
+                    sh '''
+                        docker compose exec app php artisan migrate \
+                            --force \
+                            --no-interaction
+                    '''
 
                     // Set permission yang aman
                     sh '''
@@ -49,30 +49,29 @@ pipeline {
                         docker compose exec -T app chmod -R 755 bootstrap/cache
                     '''
 
-                    // Clear cache aplikasi
-                    // sh '''
-                    //     docker compose exec -T app php artisan config:clear
-                    //     docker compose exec -T app php artisan cache:clear
-                    //     docker compose exec -T app php artisan view:clear
-                    //     docker compose exec -T app php artisan route:clear
-                    // '''
+                    sh '''
+                        docker compose exec -T app php artisan config:clear
+                        docker compose exec -T app php artisan cache:clear
+                        docker compose exec -T app php artisan view:clear
+                        docker compose exec -T app php artisan route:clear
+                    '''
                 }
             }
         }
 
-        // stage('Health Check') {
-        //     steps {
-        //         script {
-        //             // Lakukan pengecekan status aplikasi
-        //             sh '''
-        //                 if ! docker compose exec -T app php artisan tinker --execute="echo 'OK'"; then
-        //                     echo "Health check failed"
-        //                     exit 1
-        //                 fi
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Health Check') {
+            steps {
+                script {
+                    // Lakukan pengecekan status aplikasi
+                    sh '''
+                        if ! docker compose exec -T app php artisan tinker --execute="echo 'OK'"; then
+                            echo "Health check failed"
+                            exit 1
+                        fi
+                    '''
+                }
+            }
+        }
     }
 
     post {
@@ -84,12 +83,12 @@ pipeline {
 
         failure {
             script {
-                // // Rollback dengan lebih aman
-                // sh '''
-                //     docker compose down
-                //     docker compose up -d --no-deps app nginx
-                //     docker compose run --rm app php artisan migrate:rollback
-                // '''
+                // Rollback dengan lebih aman
+                sh '''
+                    docker compose down
+                    docker compose up -d --no-deps app nginx
+                    docker compose run --rm app php artisan migrate:rollback
+                '''
                 echo 'Deployment failed! Rolled back to previous version.'
             }
         }
