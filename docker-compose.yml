@@ -7,7 +7,8 @@ services:
     container_name: boneva-app
     networks:
       - boneva
-      - db_postgres
+    depends_on:
+      - mysql
 
   nginx:
     build:
@@ -21,10 +22,25 @@ services:
     depends_on:
       - app
 
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: boneva
+      MYSQL_ROOT_PASSWORD: monster88
+      MYSQL_USER: fzrsahi
+      MYSQL_PASSWORD: monster88
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - boneva
+
 networks:
   boneva:
     driver: bridge
-  db_postgres:
-    external: true
-  shared-network:
-    external: true
+
+volumes:
+  mysql_data:
