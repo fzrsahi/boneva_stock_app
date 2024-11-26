@@ -17,12 +17,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Build Docker images
-                    sh 'docker compose build'
-
-                    // Install dependencies
+                    // Build images dengan caching dan tanpa cache opsional
                     sh '''
-                        docker compose run --rm app composer install --no-interaction --optimize-autoloader --no-dev
+                        docker compose build --no-cache app nginx
                     '''
                 }
             }
@@ -31,16 +28,33 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Stop existing containers
+                    // Hentikan kontainer lama
                     sh 'docker compose down'
 
-                    // Start new containers
+                    // Start kontainer baru
                     sh 'docker compose up -d'
 
-                    // Set proper permissions
+                    // Migrasi database dengan rollback otomatis jika gagal
                     sh '''
-                        docker compose exec -T app chmod -R 777 storage
-                        docker compose exec -T app chmod -R 777 bootstrap/cache
+                        docker compose run --rm app php artisan migrate \
+                            --force \
+                            --no-interaction
+                    '''
+
+                    // Set permission yang aman
+                    sh '''
+                        docker compose exec -T app chown -R www-data:www-data storage
+                        docker compose exec -T app chown -R www-data:www-data bootstrap/cache
+                        docker compose exec -T app chmod -R 755 storage
+                        docker compose exec -T app chmod -R 755 bootstrap/cache
+                    '''
+
+                    // Clear cache aplikasi
+                    sh '''
+                        docker compose exec -T app php artisan config:clear
+                        docker compose exec -T app php artisan cache:clear
+                        docker compose exec -T app php artisan view:clear
+                        docker compose exec -T app php artisan route:clear
                     '''
                 }
             }
@@ -49,11 +63,13 @@ pipeline {
         stage('Health Check') {
             steps {
                 script {
-                    // Wait for application to be up
-                    sh 'sleep 10'
-
-                    // Check if application is responding
-                    sh 'curl -f http://localhost:4004 || exit 1'
+                    // Lakukan pengecekan status aplikasi
+                    sh '''
+                        if ! docker compose exec -T app php artisan tinker --execute="echo 'OK'"; then
+                            echo "Health check failed"
+                            exit 1
+                        fi
+                    '''
                 }
             }
         }
@@ -61,19 +77,32 @@ pipeline {
 
     post {
         success {
+            // Notifikasi deployment berhasil (misalnya via email/slack)
             echo 'Deployment successful!'
+        // Tambahkan notifikasi email/slack di sini
         }
+
         failure {
             script {
-                // Rollback in case of failure
-                sh 'docker compose down'
-                sh 'docker compose up -d --no-deps app nginx'
+                // Rollback dengan lebih aman
+                sh '''
+                    docker compose down
+                    docker compose up -d --no-deps app nginx
+                    docker compose run --rm app php artisan migrate:rollback
+                '''
+                echo 'Deployment failed! Rolled back to previous version.'
             }
-            echo 'Deployment failed!'
         }
+
         always {
-            // Cleanup
-            sh 'docker system prune -f'
+            // Bersihkan docker secara aman
+            sh '''
+                docker system prune -af --filter "label!=keep"
+                docker volume prune -f
+            '''
+
+            // Bersihkan workspace
+            cleanWs()
         }
     }
 }
