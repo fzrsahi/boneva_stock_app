@@ -144,114 +144,57 @@
             </div>
         </div>
     </div>
-
     @push('after-scripts')
         <script>
-            const customIconSVG = L.icon({
-                iconUrl: 'data:image/svg+xml;base64,' + btoa(`
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="blue" class="size-6">
-  <path d="M19.006 3.705a.75.75 0 1 0-.512-1.41L6 6.838V3a.75.75 0 0 0-.75-.75h-1.5A.75.75 0 0 0 3 3v4.93l-1.006.365a.75.75 0 0 0 .512 1.41l16.5-6Z" />
-  <path fill-rule="evenodd" d="M3.019 11.114 18 5.667v3.421l4.006 1.457a.75.75 0 1 1-.512 1.41l-.494-.18v8.475h.75a.75.75 0 0 1 0 1.5H2.25a.75.75 0 0 1 0-1.5H3v-9.129l.019-.007ZM18 20.25v-9.566l1.5.546v9.02H18Zm-9-6a.75.75 0 0 0-.75.75v4.5c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75V15a.75.75 0 0 0-.75-.75H9Z" clip-rule="evenodd" />
-</svg>
-
-        `),
-                iconSize: [32, 32], // Menyesuaikan ukuran ikon
-                iconAnchor: [16, 32], // Titik jangkar di bagian bawah
-                popupAnchor: [0, -32] // Posisi popup di atas marker
-            });
-            // Menambahkan marker untuk kota-kota di Provinsi Gorontalo
-            const cities = L.layerGroup();
-            @if ($datas)
-                @foreach ($datas as $data)
-                    const {{ str_replace(' ', '', $data->outlet_name) }} = L.marker([{{ $data->latitude }},
-                        {{ $data->langtitude }}
-                    ], {
-                        icon: customIconSVG
-                    }).bindPopup(
-                        'Nama : {{ $data->outlet_name }} <br> Tentang : {{ $data->desc }} <br> Pemilik : {{ $data->owner_name }}'
-                    ).addTo(cities);
-                @endforeach
-            @endif
-
-            const satelliteLayer = L.tileLayer(
-                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="https://www.esri.com/">Esri</a> | Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            document.addEventListener('DOMContentLoaded', () => {
+                const customIconSVG = L.icon({
+                    iconUrl: 'data:image/svg+xml;base64,' + btoa(`
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="blue" width="32" height="32">
+                        <path d="M19.006 3.705a.75.75 0 1 0-.512-1.41L6 6.838V3a.75.75 0 0 0-.75-.75h-1.5A.75.75 0 0 0 3 3v4.93l-1.006.365a.75.75 0 0 0 .512 1.41l16.5-6Z" />
+                        <path fill-rule="evenodd" d="M3.019 11.114 18 5.667v3.421l4.006 1.457a.75.75 0 1 1-.512 1.41l-.494-.18v8.475h.75a.75.75 0 0 1 0 1.5H2.25a.75.75 0 0 1 0-1.5H3v-9.129l.019-.007ZM18 20.25v-9.566l1.5.546v9.02H18Zm-9-6a.75.75 0 0 0-.75.75v4.5c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75V15a.75.75 0 0 0-.75-.75H9Z" clip-rule="evenodd" />
+                    </svg>
+                `),
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32]
                 });
-            // Menambahkan layer peta OpenStreetMap
-            const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+
+                const cities = L.layerGroup();
+
+                @if (isset($datas) && $datas->isNotEmpty())
+                    @foreach ($datas as $data)
+                        L.marker([{{ $data->latitude }}, {{ $data->langtitude }}], {
+                                icon: customIconSVG
+                            })
+                            .bindPopup(
+                                `Nama: {{ $data->outlet_name }}<br>Tentang: {{ $data->desc }}<br>Pemilik: {{ $data->owner_name }}`
+                            )
+                            .addTo(cities);
+                    @endforeach
+                @endif
+
+                const map = L.map('map', {
+                    center: [0.8055527292865906, 122.61548603646959],
+                    zoom: 10,
+                    layers: [L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'), cities]
+                });
+
+                // Draggable marker for latitude and longitude
+                const draggableMarker = L.marker([0.8055527292865906, 122.61548603646959], {
+                    draggable: true
+                }).addTo(map);
+
+                draggableMarker.on('dragend', function(event) {
+                    const position = event.target.getLatLng();
+                    document.getElementById('latitude').value = position.lat;
+                    document.getElementById('langtitude').value = position.lng;
+                });
+
+                console.log('Map initialized with draggable marker:', map);
             });
-
-            // Menambahkan layer peta dari Humanitarian OpenStreetMap Team
-            const osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
-            });
-
-            // Menambahkan layer peta Stamen (Street View)
-            const stamenToner = L.tileLayer('https://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://stamen.com">Stamen Design</a> | Map data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                maxZoom: 19
-            });
-
-            const stamenTerrain = L.tileLayer('https://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {
-                attribution: '&copy; <a href="https://stamen.com">Stamen Design</a> | Map data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                maxZoom: 19
-            });
-
-            // Inisialisasi peta dengan pusat di Gorontalo
-            const map = L.map('map', {
-                center: [0.8055527292865906, 122.61548603646959], // Koordinat Kota Gorontalo
-                zoom: 10,
-                layers: [osm, cities] // Gunakan layer OpenStreetMap dan cities di awal
-            });
-
-            // Definisi base layers
-            const baseLayers = {
-                'OpenStreetMap': osm,
-                'OpenStreetMap.HOT': osmHOT,
-                'Stamen Toner': stamenToner,
-                'Stamen Terrain': stamenTerrain,
-                'Satelit': satelliteLayer
-            };
-
-            // Definisi overlay layers
-            const overlays = {
-                'Cities': cities
-            };
-
-            // read longlat
-            var marker = L.marker([0.6011, 123.0527], { // Ubah sesuai koordinat awal yang diinginkan
-                draggable: true
-            }).addTo(map);
-
-            marker.on('dragend', function(event) {
-                var marker = event.target;
-                var position = marker.getLatLng();
-                document.getElementById("latitude").value = position.lat;
-                document.getElementById("langtitude").value = position.lng;
-            });
-
-
-            // Menambahkan kontrol layer
-            const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
-
-
-            // Menambahkan layer group untuk taman
-            const parks = L.layerGroup([taman1, taman2]);
-
-            // Menambahkan layer OpenTopoMap
-            const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-            });
-
-            // Menambahkan layer control
-            layerControl.addBaseLayer(openTopoMap, 'OpenTopoMap');
-            layerControl.addOverlay(parks, 'Parks');
         </script>
     @endpush
+
+
 
 </x-app-layout>
